@@ -46,6 +46,29 @@ class OKLinkSDK {
       throw error;
     }
   }
+
+  public async getAddressSummary(
+    chainShortName: string,
+    address: string
+  ): Promise<AxiosResponse> {
+    const endpoint = "api/v5/explorer/address/address-summary";
+    const params = {
+      chainShortName,
+      address,
+    };
+    try {
+      const response = await axios.get(`${this.baseURL}${endpoint}`, {
+        headers: {
+          "Ok-Access-Key": this.apiKey,
+        },
+        params,
+      });
+      return response;
+    } catch (error) {
+      console.error(`Error making GET request to ${endpoint}: ${error}`);
+      throw error;
+    }
+  }
 }
 
 export default OKLinkSDK;
